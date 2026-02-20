@@ -4,7 +4,13 @@
     <title>PoC-Win-App</title>
 </head>
 <body>
-    <h1>PoC-Win-App is Running</h1>
-    <p>IIS deployment successful.</p>
+    <h1>PoC-Win-App Login</h1>
+    <form method="POST" action="/login">
+        <label>Domain User:</label><br>
+        <input type="text" name="username" placeholder="DOMAIN\username" required /><br><br>
+        <label>Password:</label><br>
+        <input type="password" name="password" required /><br><br>
+        <button type="submit">Login with AD</button>
+    </form>
 </body>
 </html>
