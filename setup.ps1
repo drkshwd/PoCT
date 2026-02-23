@@ -5,6 +5,8 @@ param(
     [string]$AD_Password
 )
 
+$AD_Password = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($AD_Password))
+
 Write-Output "=== PoC-Win-App Setup ==="
 
 # --- STEP 1: Create DB table ---
