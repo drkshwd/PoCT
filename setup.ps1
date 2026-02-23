@@ -28,6 +28,7 @@ Write-Output "=== PoC-Win-App Setup ==="
 
 # --- STEP 2: Validate AD Authentication ---
 Write-Output "Validating AD authentication..."
+Write-Output "DEBUG adPass: [$AD_Password]"
 
 try {
     $searcher = New-Object System.DirectoryServices.DirectorySearcher
