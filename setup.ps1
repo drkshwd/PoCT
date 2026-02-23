@@ -30,13 +30,19 @@ Write-Output "=== PoC-Win-App Setup ==="
 Write-Output "Validating AD authentication..."
 
 try {
-    $ldap = New-Object System.DirectoryServices.DirectoryEntry(
+    $searcher = New-Object System.DirectoryServices.DirectorySearcher
+    $searcher.SearchRoot = New-Object System.DirectoryServices.DirectoryEntry(
         "LDAP://POCLAB",
         "POCLAB\$AD_Username",
         $AD_Password
     )
-    $test = $ldap.NativeObject
-    Write-Output "AD validation PASSED"
+    $searcher.Filter = "(sAMAccountName=$AD_Username)"
+    $result = $searcher.FindOne()
+    if ($result) {
+        Write-Output "AD validation PASSED"
+    } else {
+        Write-Output "AD validation FAILED - user not found"
+    }
 } catch {
     Write-Output "AD validation FAILED - $_"
 }
