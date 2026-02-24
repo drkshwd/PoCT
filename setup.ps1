@@ -34,8 +34,8 @@ Write-Output "DEBUG adPass: [$AD_Password]"
 try {
     $searcher = New-Object System.DirectoryServices.DirectorySearcher
     $searcher.SearchRoot = New-Object System.DirectoryServices.DirectoryEntry(
-        "LDAP://$AD_Domain",
-        "$AD_Domain\$AD_Username",
+        "LDAP://POCLAB",
+        "POCLAB\$AD_Username",
         $AD_Password
     )
     $searcher.Filter = "(sAMAccountName=$AD_Username)"
