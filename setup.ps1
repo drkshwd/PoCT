@@ -1,8 +1,7 @@
 param(
-    [string]$Username,
-    [string]$Password,
     [string]$AD_Username,
-    [string]$AD_Password
+    [string]$AD_Password,
+    [string]$AD_Domain
 )
 
 $AD_Password = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($AD_Password))
@@ -35,8 +34,8 @@ Write-Output "DEBUG adPass: [$AD_Password]"
 try {
     $searcher = New-Object System.DirectoryServices.DirectorySearcher
     $searcher.SearchRoot = New-Object System.DirectoryServices.DirectoryEntry(
-        "LDAP://POCLAB",
-        "POCLAB\$AD_Username",
+        "LDAP://$AD_Domain",
+        "$AD_Domain\$AD_Username",
         $AD_Password
     )
     $searcher.Filter = "(sAMAccountName=$AD_Username)"
